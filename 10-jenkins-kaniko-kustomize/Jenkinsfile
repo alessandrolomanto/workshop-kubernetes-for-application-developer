@@ -1,0 +1,52 @@
+pipeline {
+  agent {
+    kubernetes {
+      yamlFile "10-jenkins-kaniko-kustomize/jenkins-pod.yaml"
+    }
+  }
+  environment {
+    PROJECT = "alexlomanto/webapp-demo"
+    REGISTRY_USER = "alexlomanto"
+    APP = "webapp-demo"
+  }
+  stages {
+    stage("Build") {
+      steps {
+        container("kaniko") {
+          sh "/kaniko/executor  --dockerfile 10-jenkins-kaniko-kustomize/Dockerfile --context `pwd` --destination ${PROJECT}:latest --destination ${PROJECT}:${env.BRANCH_NAME.toLowerCase()}-${BUILD_NUMBER}"
+        }
+      }
+    }
+    stage("Test") {
+      when { branch "test" }
+      steps {
+        container("kustomize") {
+          sh """
+            set +e
+            kubectl create namespace $APP-${env.BRANCH_NAME.toLowerCase()}
+            set -e
+            cd 10-jenkins-kaniko-kustomize/kustomize/overlays/test
+            kustomize edit set namespace $APP-${env.BRANCH_NAME.toLowerCase()}
+            kustomize edit set image ${PROJECT}:${env.BRANCH_NAME.toLowerCase()}-$BUILD_NUMBER
+            kustomize build . | kubectl apply --filename -
+            kubectl --namespace $APP-${env.BRANCH_NAME.toLowerCase()} rollout status deployment webapp-demo
+          """
+          sh "curl http://webapp-demo.$APP-${env.BRANCH_NAME.toLowerCase()}"
+          sh "kubectl delete namespace $APP-${env.BRANCH_NAME.toLowerCase()}"
+        }
+      }
+    }
+    stage("Deploy") {
+      when { branch "main" }
+      steps {
+        container("kustomize") {
+          sh """
+            cd 10-jenkins-kaniko-kustomize/kustomize/overlays/production
+            kustomize edit set image ${PROJECT}=${PROJECT}:${env.BRANCH_NAME.toLowerCase()}-$BUILD_NUMBER
+            kustomize build . | kubectl apply --filename -
+          """
+        }
+      }
+    }
+  }
+}
