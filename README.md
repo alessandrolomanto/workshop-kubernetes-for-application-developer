@@ -15,7 +15,7 @@
 - [RBAC](7-rbac/)
 - [Kustomize](8-kustomize/)
 - [Helm](9-helm/)
-- [Jenkins Kaniko Kustomize](10-10-jenkins-kaniko-kustomize/)
+- [Jenkins Kaniko Kustomize](10-jenkins-kaniko-kustomize/)
 - [Argo Helm](11-argocd-helm/)
 
 #### For a more exercise
