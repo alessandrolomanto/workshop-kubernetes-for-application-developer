@@ -18,6 +18,9 @@
 - [Jenkins Kaniko Kustomize](10-jenkins-kaniko-kustomize/)
 - [Argo Helm](11-argocd-helm/)
 
+## Free Kubernetes Environment
+- [Killer Coda](https://killercoda.com/playgrounds)
+
 #### For a more exercise
 - [Advanced Kubernetes Materials](https://github.com/sighupio/workshop-advanced-kubernetes-material/tree/master/kubernetes)
 
