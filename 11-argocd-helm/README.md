@@ -50,7 +50,7 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.pas
 - Enter `admin` and initial administrator password
 - Click the `+ New App`
 - Insert your app the name `<APP_NAME>`, use the project `default`
-- Connect the `https://github.com/nikever/kubernetes-hello-app-delivery.git` repo to Argo CD
+- Connect the `https://github.com/alessandrolomanto/workshop-idi-2022.git` repo to Argo CD
 - For *Destination*, set cluster to `https://kubernetes.default.svc` and namespace to `default`
 - Click `Create`
 - On Top click `SYNC APP`
@@ -58,6 +58,6 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.pas
 # *** Creating App with CLI***
 ```
 argocd login `localhost:8080`
-argocd app create `<APP_NAME>` --repo https://github.com/nikever/kubernetes-hello-app-delivery.git --path argocd-helm/nginx --dest-server https://kubernetes.default.svc --dest-namespace default --port-forward-namespace argocd
+argocd app create `<APP_NAME>` --repo https://github.com/alessandrolomanto/workshop-idi-2022.git --path argocd-helm/nginx --dest-server https://kubernetes.default.svc --dest-namespace default --port-forward-namespace argocd
 argocd app sync `<APP_NAME>`
 ```
