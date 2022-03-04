@@ -84,7 +84,7 @@ kubectl apply --filename roles.yaml
 - Select: Multibranch Pipeline
 - Click: OK
 - Branch Sources: Git
-- Project Repository: https://github.com/nikever/kubernetes-hello-app-delivery.git
+- Project Repository: https://github.com/alessandrolomanto/workshop-idi-2022.git
 - Build Configuration: Jenkinsfile
 - Script Path: 10-jenkins-kaniko-kustomize/Jenkinsfile 
 - Enable Discard Old Builds
