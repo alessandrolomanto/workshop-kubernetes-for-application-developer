@@ -10,7 +10,7 @@ The only pod exposed to the outside world is the `frontend`. We will do this in 
 
 ## Prerequisites: ConfigMaps & Secrets
 
-If you have a look at `resources/multi-tier/web-deployment.yaml` you will see that states the follow:
+If you have a look at `resources/web-deployment.yaml` you will see that states the follow:
 
 ```yaml
 …
@@ -31,7 +31,7 @@ env:
 
 This means that the deployment depends on both a ConfigMap called `web` and a Secret called `web`.
 
-If we try to issue `kubectl apply -f resources/multi-tier/web-deployment.yaml` without having created the ConfigMap and the Secret beforehand, it will result in a failure.
+If we try to issue `kubectl apply -f resources/web-deployment.yaml` without having created the ConfigMap and the Secret beforehand, it will result in a failure.
 
 ```bash
 kubectl get pods
@@ -45,10 +45,10 @@ powerapp-web-7c675467d8-fc4rr   0/1       CreateContainerConfigError   0        
 As first step we **must** create our `ConfigMaps` and `Secrets`.
 
 ```bash
-kubectl apply -f resources/multi-tier/powerapp-configmap.yaml
+kubectl apply -f resources/powerapp-configmap.yaml
 configmap "web" created
 
-kubectl apply -f resources/multi-tier/powerapp-secrets.yaml
+kubectl apply -f resources/powerapp-secrets.yaml
 secret "web" created
 kubectl get configmaps
 NAME      DATA      AGE
@@ -65,9 +65,9 @@ web                   Opaque                                1         11s
 We can start rolling out our applications in the following way
 
 ```bash
-kubectl apply -f resources/multi-tier/backend-deployment.yaml
-kubectl apply -f resources/multi-tier/web-deployment.yaml
-kubectl apply -f resources/multi-tier/mongo-deployment.yaml
+kubectl apply -f resources/backend-deployment.yaml
+kubectl apply -f resources/web-deployment.yaml
+kubectl apply -f resources/mongo-deployment.yaml
 
 NAME                                READY     STATUS              RESTARTS   AGE
 powerapp-backend-106957089-jcw91    0/1       ContainerCreating   0          1m
@@ -97,18 +97,23 @@ Now we can start to expose the pods to the outer world and to each others.
 Let's start with `web`. As I mentioned this is the only pod that will be reachable from outside the cluster.
 
 ```bash
-kubectl apply -f services/web-service.yaml
+kubectl apply -f resources/web-service.yaml
 ```
 
 We can now rollout services for `backend` and `mongodb` in a similar way. Once that is done, reloading the frontend page should show no error and magically our application works.
 
 ```bash
-kubectl apply -f services/backend-service.yaml
-kubectl apply -f services/mongo-service.yaml
+kubectl apply -f resources/backend-service.yaml
+kubectl apply -f resources/mongo-service.yaml
 ```
 
 
 ```bash
 kubectl port-forward service/powerapp-web-service 8080:80
 ```
+Open new shell
+```
+ssh -L 8080:localhost:8080 workshop@<ip > -i <cluster-key>.key
+```
+
 Go to `localhost:8080`
