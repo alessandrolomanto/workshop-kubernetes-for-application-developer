@@ -21,7 +21,7 @@ spec:
     spec:
       containers: # The actual containers, a simple nginx exposing port 80
       - name: nginx
-        image: nginx:1.7.9
+        image: registry.sighup.io/workshop/nginx:1.7.9
         ports:
         - containerPort: 80
 ```
@@ -86,7 +86,7 @@ Let's imagine now that we want to change something in our image, update for exam
     spec:
       containers:
       - name: nginx
-        image: nginx:1.9.1
+        image: registry.sighup.io/workshop/nginx:1.9.1
         ports:
 ...
 
@@ -99,6 +99,8 @@ kubectl apply -f 1-deployment/deployment.yaml
 deployment "nginx-deployment" configured
 
 ---
+
+kubectl rollout status deployment/nginx-deployment
 
 kubectl get pods 
 
@@ -175,7 +177,7 @@ What happens if we have a faulty update?
     spec:
       containers:
       - name: nginx
-        image: nginx:1.91
+        image: registry.sighup.io/workshop/nginx:1.91
         ports:
 ...
 

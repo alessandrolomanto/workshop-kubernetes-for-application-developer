@@ -47,7 +47,7 @@ metadata:
   name: volume-user
 spec:
   volumes:
-    - name: storage
+    - name: task-pv-storage
       persistentVolumeClaim:
         claimName: alpha-claim
   containers:

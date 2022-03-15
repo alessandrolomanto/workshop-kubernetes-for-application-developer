@@ -8,7 +8,7 @@ We can deploy the job by running:
 Output is going to be:
 
 ```bash
-kubectl get pods
+kubectl get pods -w
 NAME       READY     STATUS    RESTARTS   AGE
 pi-xcv5b   1/1       Running   0          <invalid>
 .
@@ -24,7 +24,5 @@ k logs pi-xcv5b
 ```
 Delete job
 ```bash
-kubectl delete job pi
 kubectl delete -f 4-jobs/job.yaml
-
 ```

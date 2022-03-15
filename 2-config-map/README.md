@@ -36,14 +36,6 @@ data:
     how.nice.to.look=fairlyNice
 ```
 
-Or they can be configured using `kubectl`:
-
-```bash
-kubectl create configmap my-config \
-     --from-literal=literal-key=literal-value \
-     --from-file=ui.properties \
-     --from-file=path/to/config/dir
-```
 
 ### Retrieving ConfigMaps
 
@@ -95,14 +87,25 @@ apiVersion: apps/v1
 
 They are stored as strings in etcd as clear text, you should NOT put sensitive data in configmaps.
 
-Let's deploy
+Let's deploy and check configmap
 ```bash
 kubectl apply -f 2-config-map/cm.yaml
+kubectl get configmap
+```
+
+Let's deploy and check deployment
+```bash
 kubectl apply -f 2-config-map/deploy.yaml
+kubectl describe deploy imaginarygame
 ```
 
 Let's check environment variables and files mounted
 ```
 kubectl exec -it imaginarygame-c587857bf-mrxzd -- env
 kubectl exec -it imaginarygame-c587857bf-mrxzd -- ls /etc/game/cfg
+```
+
+Let's clean
+```
+kubectl delete -f 2-config-map/cm.yaml -f 2-config-map/deploy.yaml
 ```

@@ -72,6 +72,10 @@ kubectl apply -f 3-secrets/pod.yaml
 
 Let's check environment variables
 ```bash
-kubectl exec -it imaginarygame-c587857bf-mrxzd -- env
-kubectl exec -it imaginarygame-c587857bf-mrxzd -- ls /etc/game/cfg
+kubectl exec -it secret-env-pod -- env
+```
+
+Let's clean
+```bash
+kubectl delete -f 3-secrets/pod.yaml -f 3-secrets/secret.yaml
 ```

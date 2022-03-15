@@ -91,3 +91,10 @@ kubectl apply --filename roles.yaml
 - Click: Save
 
 # IMPORTANT! After save, Jenkins scan branch and build pipeline automatically. Stop build pipeline and trigger it manually.
+
+Go to `test` pipeline:
+http://localhost:8080/job/Pipeline/job/test/
+
+Go to `main` pipeline:
+http://localhost:8080/job/Pipeline/job/main/
+
