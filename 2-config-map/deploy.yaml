@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: game-container
-        image: nginx
+        image: registry.sighup.io/workshop/nginx
         env:
         # consume the property-like keys in environment variables
         - name: GAME_PROPERTIES_NAME
