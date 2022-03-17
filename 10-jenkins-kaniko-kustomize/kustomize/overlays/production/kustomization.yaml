@@ -5,4 +5,3 @@ resources:
 - ingress.yaml
 - namespace.yaml
 namespace: production
-

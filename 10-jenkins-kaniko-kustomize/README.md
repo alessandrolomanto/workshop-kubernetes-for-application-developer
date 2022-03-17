@@ -97,4 +97,3 @@ http://localhost:8080/job/Pipeline/job/test/
 
 Go to `main` pipeline:
 http://localhost:8080/job/Pipeline/job/main/
-
