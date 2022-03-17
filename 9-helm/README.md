@@ -21,7 +21,7 @@ helm create nginx
 ```
 ```
 #Edit values.yaml
-# repository: registry.sighup.io/workshop/sighup/nginx
+# repository: registry.sighup.io/workshop/nginx
 # replicaCount: 4
 # tag: "alpine"
 ```
