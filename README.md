@@ -23,4 +23,3 @@
 
 #### For a more exercise
 - [Advanced Kubernetes Materials](https://github.com/sighupio/workshop-advanced-kubernetes-material/tree/master/kubernetes)
-

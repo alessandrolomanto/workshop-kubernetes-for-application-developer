@@ -24,9 +24,3 @@ kubectl describe pod
 ```
 kubectl delete pod test
 ```
-
-
-
-
-
-
