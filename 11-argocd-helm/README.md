@@ -58,6 +58,6 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.pas
 # *** Creating App with CLI***
 ```
 argocd login `localhost:8080`
-argocd app create `<APP_NAME>` --repo https://github.com/alessandrolomanto/workshop-idi-2022.git --path argocd-helm/nginx --dest-server https://kubernetes.default.svc --dest-namespace default --port-forward-namespace argocd
+argocd app create `<APP_NAME>` --repo https://github.com/alessandrolomanto/workshop-idi-2022.git --path 11-argocd-helm/nginx --dest-server https://kubernetes.default.svc --dest-namespace default --port-forward-namespace argocd
 argocd app sync `<APP_NAME>`
 ```

@@ -9,7 +9,7 @@ spec:
         claimName: alpha-claim
   containers:
     - name: task-pv-container
-      image: nginx
+      image: registry.sighup.io/workshop/nginx
       ports:
         - containerPort: 80
           name: "http-server"

@@ -5,7 +5,7 @@ metadata:
 spec:
   containers:
     - name: mycontainer
-      image: redis
+      image: registry.sighup.io/workshop/redis
       env:
         - name: SECRET_USERNAME
           valueFrom:
