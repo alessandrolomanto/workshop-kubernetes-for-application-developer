@@ -18,7 +18,7 @@ Kubectl is the CLI controller app for kubernetes. You will use to interact with 
 Kustomize is needed to ease the handling and the customization of multiple
 manifest files.
 
-[Here how to install it](https://github.com/kubernetes-sigs/kustomize/blob/master/docs/INSTALL.md)
+[Here how to install it](https://kubectl.docs.kubernetes.io/installation/kustomize/)
 
 
 ### Setting up minikube
